@@ -28,15 +28,20 @@ jobs:
     - name: Chocolatey Action
       uses: crazy-max/ghaction-chocolatey@v1.2.2
       with:
-        args: install cmake ActivePerl python2 ruby git svn patch diffutils gperf -y
+        args: install cmake python2 ruby patch diffutils gperf -y
    
     - name: install pywin32
       run: pip install pywin32
-      
-    #- name: build
-    #  run: perl Tools/Scripts/build-webkit --jsc-only --release
+    
+    - uses: shogo82148/actions-setup-perl@v1
+    
+    - run: perl -v
+
     - name: build
-      run: Tools/Scripts/build-jsc --jsc-only --release
+      run: perl Tools/Scripts/build-webkit --help
+
+    - name: build-jsc
+      run: perl /Tools/Scripts/build-jsc --jsc-only --release --verbose
     
     - name: show built
       run: ls 
