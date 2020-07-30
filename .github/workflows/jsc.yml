@@ -37,11 +37,13 @@ jobs:
     
     - run: perl -v
 
-    #- name: build
-    #  run: perl Tools/Scripts/build-webkit --help
+    - name: add deps
+      run: perl Tools/Scripts/update-webkit
 
-    - name: build-jsc
-      run: perl Tools/Scripts/build-jsc --jsc-only --release --verbose
+    - run: perl Tools/Scripts/build-webkit --wincairo --release --verbose
+
+    #- name: build-jsc
+    #  run: perl Tools/Scripts/build-jsc --jsc-only --release --verbose
     
     - name: show built
       run: ls 
