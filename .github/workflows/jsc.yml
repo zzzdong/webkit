@@ -37,8 +37,8 @@ jobs:
     
     - run: perl -v
 
-    - name: add deps
-      run: perl Tools/Scripts/update-webkit
+    #- name: add deps
+    #  run: perl Tools/Scripts/update-webkit
 
     - run: perl Tools/Scripts/build-webkit --wincairo --release --verbose
 
