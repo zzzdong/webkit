@@ -36,11 +36,12 @@ jobs:
     - uses: shogo82148/actions-setup-perl@v1
     
     - run: perl -v
+    - run: cpan File::Copy::Recursive
 
     #- name: add deps
     #  run: perl Tools/Scripts/update-webkit
 
-    - run: perl Tools/Scripts/build-webkit --wincairo --release --verbose
+    - run: perl Tools/Scripts/build-webkit --wincairo -only-jsc --release --verbose
 
     #- name: build-jsc
     #  run: perl Tools/Scripts/build-jsc --jsc-only --release --verbose
