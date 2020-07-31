@@ -41,14 +41,14 @@ jobs:
     #- name: add deps
     #  run: perl Tools/Scripts/update-webkit
 
-    - run: perl Tools/Scripts/build-webkit --wincairo -only-jsc --release --verbose
+    #- run: perl Tools/Scripts/build-jsc --wincairo -only-jsc --release --verbose
 
-    #- name: build-jsc
-    #  run: perl Tools/Scripts/build-jsc --jsc-only --release --verbose
+    - name: build-jsc
+      run: perl Tools/Scripts/build-jsc --release --verbose
     
-    - name: show built
+    - name: show dir
       run: ls 
     
     - name: show built2
-      run: ls WebKitBuild
+      run: ls WebKitBuild/Release
 
