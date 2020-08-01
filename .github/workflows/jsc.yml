@@ -41,7 +41,7 @@ jobs:
     - run: python Tools/Scripts/update-webkit-wincairo-libs.py
 
     - name: build-jsc
-      run: mkdir WebKitBuild/Build-JSC && cmake -DPORT="JSCOnly" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Release -G Ninja -DDEVELOPER_MODE=ON  -DENABLE_FTL_JIT=OFF ../../ && ninja
+      run: mkdir WebKitBuild/Build-JSC && cd WebKitBuild/Build-JSC && cmake -DPORT="JSCOnly" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Release -G Ninja -DDEVELOPER_MODE=ON  -DENABLE_FTL_JIT=OFF ../../ && ninja
     
     - name: show built
       run: ls WebKitBuild/Build-JSC
