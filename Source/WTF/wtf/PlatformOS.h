@@ -115,7 +115,7 @@
 #endif
 
 /* OS(WINDOWS) - Any version of Windows */
-#if defined(WIN32) || defined(_WIN32)
+#if defined(WIN32) || defined(_WIN32) || defined(_WINDOWS)
 #define WTF_OS_WINDOWS 1
 #endif
 
