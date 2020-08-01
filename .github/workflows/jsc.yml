@@ -38,17 +38,11 @@ jobs:
     - run: perl -v
     - run: cpan File::Copy::Recursive
 
-    #- name: add deps
-    #  run: perl Tools/Scripts/update-webkit
-
-    #- run: perl Tools/Scripts/build-jsc --wincairo -only-jsc --release --verbose
+    - run: python Tools/Scripts/update-webkit-wincairo-libs.py
 
     - name: build-jsc
-      run: perl Tools/Scripts/build-jsc --release --verbose
+      run: mkdir WebKitBuild/Build-JSC && cmake -DPORT="JSCOnly" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Release -G Ninja -DDEVELOPER_MODE=ON  -DENABLE_FTL_JIT=OFF ../../ && ninja
     
-    - name: show dir
-      run: ls 
-    
-    - name: show built2
-      run: ls WebKitBuild/Release
+    - name: show built
+      run: ls WebKitBuild/Build-JSC
 
