@@ -4,6 +4,7 @@ list(APPEND WTF_SOURCES
 
 if (WIN32)
     list(APPEND WTF_SOURCES
+        text/win/StringWin.cpp
         text/win/TextBreakIteratorInternalICUWin.cpp
 
         win/CPUTimeWin.cpp
@@ -11,9 +12,10 @@ if (WIN32)
         win/FileSystemWin.cpp
         win/LanguageWin.cpp
         win/MainThreadWin.cpp
+        win/MemoryFootprintWin.cpp
+        win/MemoryPressureHandlerWin.cpp
         win/OSAllocatorWin.cpp
         win/PathWalker.cpp
-        win/ThreadSpecificWin.cpp
         win/ThreadingWin.cpp
     )
     list(APPEND WTF_PUBLIC_HEADERS
@@ -147,9 +149,15 @@ if (LOWERCASE_EVENT_LOOP_TYPE STREQUAL "glib")
         ${GLIB_LIBRARIES}
     )
 else ()
-    list(APPEND WTF_SOURCES
-        generic/RunLoopGeneric.cpp
-    )
+    if(WIN32)
+        list(APPEND WTF_SOURCES
+            win/RunLoopWin.cpp
+        )
+    else()
+        list(APPEND WTF_SOURCES
+            generic/RunLoopGeneric.cpp
+        )
+    endif()
 endif ()
 
 list(APPEND WTF_LIBRARIES
