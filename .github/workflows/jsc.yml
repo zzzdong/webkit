@@ -37,17 +37,20 @@ jobs:
     
     - run: perl -v
     - run: cpan File::Copy::Recursive
-
-    - run: python Tools/Scripts/update-webkit-wincairo-libs.py
-
+  
     - name: build-jsc
-      run: mkdir WebKitBuild/Build-JSC && cd WebKitBuild/Build-JSC && cmake -DPORT="JSCOnly" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Release -G Ninja -DDEVELOPER_MODE=ON  -DENABLE_FTL_JIT=OFF ../../ && ninja && cd ../../
+      run: perl Tools/Scripts/build-jsc --wincairo --only-jsc
+
+    #- run: python Tools/Scripts/update-webkit-wincairo-libs.py
+
+    #- name: build-jsc
+    #  run: mkdir WebKitBuild/Build-JSC && cd WebKitBuild/Build-JSC && cmake -DPORT="JSCOnly" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Release -G Ninja -DDEVELOPER_MODE=ON  -DENABLE_FTL_JIT=OFF ../../ && ninja && cd ../../
     
-    - name: show built
-      run: ls WebKitBuild/Build-JSC
+    #- name: show built
+    #  run: ls WebKitBuild/Build-JSC
   
     - name: 'Tar files'
-      run: tar -cvf jsc-libs.tar WebKitBuild/Build-JSC/lib64
+      run: tar -cvf jsc-libs.tar WebKitBuild/Release/lib64
 
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v2
